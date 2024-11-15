@@ -22,10 +22,16 @@ public class GameListService {
 	
 
 	@Transactional(readOnly = true)
-	public List<GameListDTO> findAll(){
+	public List<GameListDTO> findAll() {
 		List<GameList> result = gameListRepository.findAll();
-		return result.stream().map(x -> new GameListDTO(x)).toList(); // transformando a GameList em DT
+		return result.stream().map(GameListDTO::new).toList(); // transformando a GameList em DT
+	}
+
+
+	@Transactional(readOnly = true)
+	public GameListDTO findById(Long id) {
+		GameList entity = gameListRepository.findById(id).get();
+		return new GameListDTO(entity);
 	}
 	
-
 }

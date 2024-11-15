@@ -16,15 +16,22 @@ import com.mullerlari.dslist.services.GameListService;
 import com.mullerlari.dslist.services.GameService;
 
 @RestController
-@RequestMapping(value = "/lists")
+@RequestMapping(value = "/games")
 public class GameController {
 
 	@Autowired
-	private GameListService gameListService;
+	private GameService gameService;
 
+	@GetMapping(value = "/{id}")
+	public GameDTO findById(@PathVariable Long id){
+		GameDTO result = gameService.findById(id);
+		return result;
+		
+	}
+	
 	@GetMapping
-	public List<GameListDTO> findAll(){
-		List<GameListDTO> result = gameListService.findAll();
+	public List<GameMinDTO> findAll(){
+		List<GameMinDTO> result = gameService.findAll();
 		return result;
 	}
 }
