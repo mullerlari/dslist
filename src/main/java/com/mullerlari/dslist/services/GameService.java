@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.mullerlari.dslist.dto.GameDTO;
 import com.mullerlari.dslist.dto.GameMinDTO;
@@ -19,8 +20,8 @@ public class GameService {
 	private GameRepository gameRepository;
 	
 	@Transactional(readOnly = true)
-	public GameDTO findById(Long id) {
-		Game result = gameRepository.findById(id).get();//busca no BD
+	public GameDTO findById(@PathVariable  Long listId) {
+		Game result = gameRepository.findById(listId).get();//busca no BD
 		return new GameDTO(result);//Converte para DTO
 		
 	}
@@ -39,5 +40,4 @@ public class GameService {
 	
 	}
 	
-
 }
